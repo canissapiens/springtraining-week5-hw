@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Weather Forecast for Place</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/weather-icons.css}" href="css/weather-icons.css">
+    <link rel="stylesheet" th:href="@{/css/weather-icons-wind.css}" href="weather-icons-wind.css">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+    </style>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/starter-template.css}">
+</head>
+<body>
+<main role="main" class="container">
+    <div class="starter-template">
+        <h1>Pogoda dla: <span th:text="${getLocation.getNewPlace()}"></span></h1>
+        <i class="wi" th:classappend="${forecast.getIcon()}"></i>
+    </div>
+
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8" style="background-color: #7abaff">
+            <p><span th:text="${welcome}" th:class="font-weight-bold"></span></p>
+            <br/>
+
+            <table th:class="table">
+                <tr>
+                    <td>Godzina:</td>
+                    <td th:text="${forecast.getTime()}"></td>
+                </tr>
+                <tr>
+                    <td>Temperatura:</td>
+                    <td th:text="${forecast.getTemp()}"></td>
+                </tr>
+                <tr>
+                    <td>Wiatr:</td>
+                    <td th:text="${forecast.getWind()}"></td>
+                </tr>
+            </table>
+
+
+            <form th:action="@{/weather/reload}" th:method="get">
+                <table th:class="table">
+                    <tr>
+                        <td></td>
+                        <td><input class="btn btn-primary" th:type="submit" th:value="Powrót"
+                                   th:name="reload"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">&nbsp;</td>
+
+                    </tr>
+
+                </table>
+            </form>
+            <br/>
+        </div><!-- column -->
+        <div class="col-2"></div>
+    </div><!-- row -->
+
+
+</main>
+<script th:src="@{/js/jquery-3.3.1.slim.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
